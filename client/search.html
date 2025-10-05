@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Events - HopeBridge</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌉</span>
+                <h1>HopeBridge</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="search.html" class="nav-link active">Find Events</a></li>
+                <li><a href="#" class="nav-link">Our Impact</a></li>
+                <li><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 搜索页面内容 -->
+    <main class="search-page">
+        <div class="container">
+            <div class="search-header">
+                <h1>Discover Charity Events</h1>
+                <p>Find the perfect event to support causes you care about</p>
+            </div>
+
+            <div class="search-layout">
+                <!-- 筛选侧边栏 -->
+                <aside class="filters-sidebar">
+                    <div class="filters-header">
+                        <h2>Filters</h2>
+                        <button id="clear-filters" class="clear-filters-btn">Clear All</button>
+                    </div>
+
+                    <!-- 分类筛选 -->
+                    <div class="filter-group">
+                        <h3>Category</h3>
+                        <div id="categories-container" class="filter-options">
+                            <!-- 分类将通过JavaScript动态加载 -->
+                        </div>
+                    </div>
+
+                    <!-- 日期筛选 -->
+                    <div class="filter-group">
+                        <h3>Date</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="radio" name="date" value="all" checked>
+                                <span class="checkmark"></span>
+                                Any Date
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="date" value="today">
+                                <span class="checkmark"></span>
+                                Today
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="date" value="tomorrow">
+                                <span class="checkmark"></span>
+                                Tomorrow
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="date" value="specific">
+                                <span class="checkmark"></span>
+                                Specific Date
+                            </label>
+                            <input type="date" id="specific-date" class="date-input" style="display: none;">
+                        </div>
+                    </div>
+
+                    <!-- 地点筛选 -->
+                    <div class="filter-group">
+                        <h3>Location</h3>
+                        <input type="text" id="location-input" placeholder="Enter city or venue" class="location-input">
+                    </div>
+
+                    <button id="apply-filters" class="apply-filters-btn">Apply Filters</button>
+                </aside>
+
+                <!-- 搜索结果 -->
+                <section class="search-results">
+                    <div class="results-header">
+                        <div class="results-info">
+                            <h2>Events</h2>
+                            <span id="results-count" class="results-count">Loading...</span>
+                        </div>
+                        <div class="sort-options">
+                            <select id="sort-select" class="sort-select">
+                                <option value="date">Sort by Date</option>
+                                <option value="name">Sort by Name</option>
+                                <option value="price">Sort by Price</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="search-loading" class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Searching for events...</p>
+                    </div>
+
+                    <div id="search-results-container" class="events-grid">
+                        <!-- 搜索结果将通过JavaScript动态加载 -->
+                    </div>
+
+                    <div id="search-error" class="error-message" style="display: none;">
+                        <div class="error-icon">⚠️</div>
+                        <p>Unable to load search results. Please try again.</p>
+                    </div>
+
+                    <div id="no-results" class="no-results" style="display: none;">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>No Events Found</h3>
+                        <p>Try adjusting your filters to see more results.</p>
+                        <button id="reset-search" class="view-all-btn">Reset Search</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌉</span>
+                    <h3>HopeBridge</h3>
+                    <p>Connecting Hearts, Building Futures</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Get Involved</h4>
+                        <a href="#">Attend Events</a>
+                        <a href="#">Volunteer</a>
+                        <a href="#">Partner With Us</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About</h4>
+                        <a href="#">Our Story</a>
+                        <a href="#">Impact Reports</a>
+                        <a href="#">Team</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HopeBridge Charity Foundation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>

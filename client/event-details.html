@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - HopeBridge</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌉</span>
+                <h1>HopeBridge</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="search.html" class="nav-link">Find Events</a></li>
+                <li><a href="#" class="nav-link">Our Impact</a></li>
+                <li><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 详情页面内容 -->
+    <main class="event-details-page">
+        <div class="container">
+            <!-- 返回按钮 -->
+            <div class="back-nav">
+                <a href="javascript:history.back()" class="back-btn">
+                    <span>←</span>
+                    Back to Events
+                </a>
+            </div>
+
+            <!-- 主要内容区域 -->
+            <div id="event-loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading event details...</p>
+            </div>
+
+            <div id="event-error" class="error-message" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <p>Unable to load event details. Please try again.</p>
+                <a href="search.html" class="view-all-btn">Browse All Events</a>
+            </div>
+
+            <div id="event-content" style="display: none;">
+                <!-- 事件头部信息 -->
+                <section class="event-header-section">
+                    <div class="event-hero">
+                        <div class="event-image-large">
+                            <div class="event-category-badge" id="event-category"></div>
+                            <div class="event-image-placeholder" id="event-image"></div>
+                        </div>
+                        <div class="event-hero-content">
+                            <div class="event-meta-top">
+                                <span class="event-category" id="event-category-text"></span>
+                                <span class="event-date" id="event-date"></span>
+                            </div>
+                            <h1 id="event-title">Event Title</h1>
+                            <div class="event-location">
+                                <span>📍</span>
+                                <span id="event-location">Location</span>
+                            </div>
+                            <div class="event-price-large">
+                                <span id="event-price">Price</span>
+                            </div>
+                            <div class="event-actions">
+                                <button id="register-btn" class="register-btn">
+                                    Register Now
+                                </button>
+                                <button class="share-btn">
+                                    Share Event
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 事件详情网格 -->
+                <section class="event-details-grid">
+                    <!-- 左侧：事件详情 -->
+                    <div class="event-info">
+                        <div class="info-section">
+                            <h2>About This Event</h2>
+                            <p id="event-description" class="event-description-full"></p>
+                        </div>
+
+                        <div class="info-section">
+                            <h2>Event Details</h2>
+                            <div class="details-list">
+                                <div class="detail-item">
+                                    <span class="detail-label">Date & Time</span>
+                                    <span class="detail-value" id="detail-date"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Location</span>
+                                    <span class="detail-value" id="detail-location"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Category</span>
+                                    <span class="detail-value" id="detail-category"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Organizer</span>
+                                    <span class="detail-value" id="detail-organizer"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h2>What to Expect</h2>
+                            <ul class="expectation-list">
+                                <li>Meet like-minded individuals passionate about making a difference</li>
+                                <li>Learn more about the cause and its impact</li>
+                                <li>Participate in engaging activities and networking</li>
+                                <li>Contribute directly to meaningful community projects</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：注册和进度 -->
+                    <div class="event-sidebar">
+                        <!-- 进度卡片 -->
+                        <div class="progress-card">
+                            <h3>Registration Progress</h3>
+                            <div class="progress-stats">
+                                <div class="progress-number">
+                                    <span class="current" id="progress-current">0</span>
+                                    <span class="separator">/</span>
+                                    <span class="goal" id="progress-goal">0</span>
+                                </div>
+                                <div class="progress-percentage" id="progress-percentage">0%</div>
+                            </div>
+                            <div class="progress-bar-large">
+                                <div class="progress-fill-large" id="progress-fill"></div>
+                            </div>
+                            <div class="progress-text-large">
+                                <span>Attendees Registered</span>
+                                <span>Event Goal</span>
+                            </div>
+                        </div>
+
+                        <!-- 快速信息卡片 -->
+                        <div class="quick-info-card">
+                            <h3>Quick Info</h3>
+                            <div class="quick-info-list">
+                                <div class="quick-info-item">
+                                    <span class="info-icon">💰</span>
+                                    <div class="info-content">
+                                        <span class="info-label">Ticket Price</span>
+                                        <span class="info-value" id="quick-price"></span>
+                                    </div>
+                                </div>
+                                <div class="quick-info-item">
+                                    <span class="info-icon">👥</span>
+                                    <div class="info-content">
+                                        <span class="info-label">Available Spots</span>
+                                        <span class="info-value" id="quick-spots"></span>
+                                    </div>
+                                </div>
+                                <div class="quick-info-item">
+                                    <span class="info-icon">⏰</span>
+                                    <div class="info-content">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">3-4 hours</span>
+                                    </div>
+                                </div>
+                                <div class="quick-info-item">
+                                    <span class="info-icon">🎯</span>
+                                    <div class="info-content">
+                                        <span class="info-label">Impact Level</span>
+                                        <span class="info-value">High</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 联系信息 -->
+                        <div class="contact-card">
+                            <h3>Questions?</h3>
+                            <p>Contact our event team for any inquiries:</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <span>📧</span>
+                                    <span>events@hopebridge.org</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span>📞</span>
+                                    <span>(02) 1234 5678</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 注册模态框 -->
+                <div id="register-modal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Event Registration</h2>
+                            <button class="modal-close" id="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="registration-info">
+                                <h3 id="modal-event-title">Event Title</h3>
+                                <p class="modal-event-date" id="modal-event-date"></p>
+                                <p class="modal-event-price" id="modal-event-price"></p>
+                            </div>
+                            <div class="registration-message">
+                                <div class="message-icon">🚧</div>
+                                <h4>Registration Feature Coming Soon</h4>
+                                <p>We're currently working on our registration system. Please check back later to register for this event, or contact us directly for immediate assistance.</p>
+                            </div>
+                            <div class="modal-actions">
+                                <button class="btn-secondary" id="modal-cancel">Cancel</button>
+                                <button class="btn-primary" onclick="alert('This feature is currently under construction. Please check back later.')">
+                                    Contact Us to Register
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌉</span>
+                    <h3>HopeBridge</h3>
+                    <p>Connecting Hearts, Building Futures</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Get Involved</h4>
+                        <a href="#">Attend Events</a>
+                        <a href="#">Volunteer</a>
+                        <a href="#">Partner With Us</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About</h4>
+                        <a href="#">Our Story</a>
+                        <a href="#">Impact Reports</a>
+                        <a href="#">Team</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HopeBridge Charity Foundation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/event-details.js"></script>
+</body>
+</html>

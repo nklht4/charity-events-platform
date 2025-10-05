@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HopeBridge - Connecting Hearts, Building Futures</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌉</span>
+                <h1>HopeBridge</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="search.html" class="nav-link">Find Events</a></li>
+                <li><a href="#" class="nav-link">Our Impact</a></li>
+                <li><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main banner -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Build Bridges of Hope</h1>
+            <p>Join hands with HopeBridge to create lasting change in communities across Australia. Every event you attend helps build a brighter future.</p>
+            <a href="search.html" class="cta-button">Find Events Near You</a>
+        </div>
+    </header>
+
+    <!-- Mission Statement -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">🤝</div>
+                    <h3>Community First</h3>
+                    <p>We prioritize local needs and empower communities to drive their own development.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">🌱</div>
+                    <h3>Sustainable Impact</h3>
+                    <p>Our programs create long-term solutions, not temporary fixes.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">🔍</div>
+                    <h3>Transparent Process</h3>
+                    <p>See exactly how your contributions make a difference in real time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity Exhibition -->
+    <section class="featured-events">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Charity Events</h2>
+                <p>Discover meaningful ways to contribute to causes you care about</p>
+            </div>
+            
+            <div id="events-loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading inspiring events...</p>
+            </div>
+            
+            <div id="events-container" class="events-grid"></div>
+            
+            <div id="events-error" class="error-message" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <p>Unable to load events at this time. Please try again later.</p>
+            </div>
+
+            <div class="view-all-container">
+                <a href="search.html" class="view-all-btn">View All Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistical data -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="127">0</div>
+                    <div class="stat-label">Events Hosted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="24500">0</div>
+                    <div class="stat-label">Lives Impacted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="89">0</div>
+                    <div class="stat-label">Community Partners</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Years of Service</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌉</span>
+                    <h3>HopeBridge</h3>
+                    <p>Connecting Hearts, Building Futures</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Get Involved</h4>
+                        <a href="#">Attend Events</a>
+                        <a href="#">Volunteer</a>
+                        <a href="#">Partner With Us</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About</h4>
+                        <a href="#">Our Story</a>
+                        <a href="#">Impact Reports</a>
+                        <a href="#">Team</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HopeBridge Charity Foundation. All rights reserved. ABN: 12 345 678 901</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
