@@ -8,7 +8,8 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client')));
+
+app.use(express.static(path.join(__dirname, 'client')));
 
 const db = mysql.createConnection({
     host: 'localhost',      
@@ -95,10 +96,9 @@ app.get('/api/events/:id', (req, res) => {
     console.log(`📄 Request for event details ID: ${eventId}`);
     
     const query = `
-        SELECT e.*, c.CategoryName, u.Username as OrganizerName 
+        SELECT e.*, c.CategoryName
         FROM events e 
         JOIN categories c ON e.CategoryID = c.CategoryID 
-        JOIN users u ON e.OrganizerID = u.UserID 
         WHERE e.EventID = ?
     `;
     
