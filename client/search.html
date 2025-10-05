@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- Navigation bar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <!-- 搜索页面内容 -->
+    <!-- Search for page content -->
     <main class="search-page">
         <div class="container">
             <div class="search-header">
@@ -32,22 +32,22 @@
             </div>
 
             <div class="search-layout">
-                <!-- 筛选侧边栏 -->
+                <!-- Filter the sidebar -->
                 <aside class="filters-sidebar">
                     <div class="filters-header">
                         <h2>Filters</h2>
                         <button id="clear-filters" class="clear-filters-btn">Clear All</button>
                     </div>
 
-                    <!-- 分类筛选 -->
+                    <!-- Classification filtering -->
                     <div class="filter-group">
                         <h3>Category</h3>
                         <div id="categories-container" class="filter-options">
-                            <!-- 分类将通过JavaScript动态加载 -->
+                            <!-- The classification will be dynamically loaded through JavaScript. -->
                         </div>
                     </div>
 
-                    <!-- 日期筛选 -->
+                    <!-- Date filtering -->
                     <div class="filter-group">
                         <h3>Date</h3>
                         <div class="filter-options">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <!-- 地点筛选 -->
+                    <!-- Location Filtering -->
                     <div class="filter-group">
                         <h3>Location</h3>
                         <input type="text" id="location-input" placeholder="Enter city or venue" class="location-input">
@@ -84,7 +84,7 @@
                     <button id="apply-filters" class="apply-filters-btn">Apply Filters</button>
                 </aside>
 
-                <!-- 搜索结果 -->
+                <!-- Search results -->
                 <section class="search-results">
                     <div class="results-header">
                         <div class="results-info">
@@ -106,7 +106,7 @@
                     </div>
 
                     <div id="search-results-container" class="events-grid">
-                        <!-- 搜索结果将通过JavaScript动态加载 -->
+                        <!-- The search results will be dynamically loaded through JavaScript. -->
                     </div>
 
                     <div id="search-error" class="error-message" style="display: none;">
