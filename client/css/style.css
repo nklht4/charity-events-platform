@@ -559,7 +559,7 @@ body {
     }
 }
 
-/* ===== 搜索页面样式 ===== */
+/* ===== Search page style ===== */
 .search-page {
     padding: 2rem 0;
     min-height: 80vh;
@@ -588,7 +588,7 @@ body {
     gap: 2rem;
 }
 
-/* 筛选侧边栏 */
+/* Filter the sidebar */
 .filters-sidebar {
     background: var(--white);
     padding: 2rem;
@@ -721,7 +721,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* 搜索结果区域 */
+/* Search results area */
 .search-results {
     flex: 1;
 }
@@ -769,7 +769,7 @@ body {
     border-color: var(--accent-orange);
 }
 
-/* 无结果状态 */
+/* Unsuccessful state*/
 .no-results {
     text-align: center;
     padding: 4rem 2rem;
@@ -794,7 +794,7 @@ body {
     margin-bottom: 2rem;
 }
 
-/* 响应式设计 */
+/* Responsive design */
 @media (max-width: 968px) {
     .search-layout {
         grid-template-columns: 1fr;
@@ -811,13 +811,13 @@ body {
     }
 }
 
-/* ===== 详情页面样式 ===== */
+/* ===== Details page style ===== */
 .event-details-page {
     padding: 2rem 0;
     min-height: 80vh;
 }
 
-/* 返回导航 */
+/* Return to Navigation */
 .back-nav {
     margin-bottom: 2rem;
 }
@@ -840,7 +840,7 @@ body {
     color: var(--white);
 }
 
-/* 事件头部区域 */
+/* Event header area */
 .event-header-section {
     margin-bottom: 3rem;
 }
@@ -986,7 +986,7 @@ body {
     color: var(--white);
 }
 
-/* 事件详情网格 */
+/* Event Details Grid */
 .event-details-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -1066,7 +1066,7 @@ body {
     font-weight: bold;
 }
 
-/* 侧边栏 */
+/* Side bar */
 .event-sidebar {
     display: flex;
     flex-direction: column;
@@ -1203,7 +1203,7 @@ body {
     color: var(--dark-text);
 }
 
-/* 模态框 */
+/* Modal box */
 .modal {
     position: fixed;
     top: 0;
@@ -1338,7 +1338,7 @@ body {
     color: var(--white);
 }
 
-/* 响应式设计 */
+/* Responsive design */
 @media (max-width: 968px) {
     .event-hero {
         grid-template-columns: 1fr;
