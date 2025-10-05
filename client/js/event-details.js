@@ -1,4 +1,4 @@
-// 详情页面功能
+// Details page functionality
 class EventDetailsPage {
     constructor() {
         this.eventId = this.getEventIdFromUrl();
@@ -53,22 +53,22 @@ class EventDetailsPage {
     displayEventDetails() {
         if (!this.eventData) return;
 
-        // 设置页面标题
+        // Set the page title
         app.setPageTitle(this.eventData.EventName);
 
-        // 更新事件头部信息
+        // Update the header information of the event
         this.updateEventHeader();
         
-        // 更新事件详情
+        // Update event details
         this.updateEventDetails();
         
-        // 更新进度信息
+        // Update progress information
         this.updateProgressInfo();
         
-        // 更新快速信息
+        // Update on urgent information
         this.updateQuickInfo();
         
-        // 更新模态框内容
+        // Update the content of the modal box
         this.updateModalContent();
     }
 
@@ -125,12 +125,12 @@ class EventDetailsPage {
     }
 
     setupEventListeners() {
-        // 注册按钮点击事件
+        // Registration button click event
         document.getElementById('register-btn').addEventListener('click', () => {
             this.showRegistrationModal();
         });
 
-        // 模态框关闭事件
+        // Modal box close event
         document.getElementById('modal-close').addEventListener('click', () => {
             this.hideRegistrationModal();
         });
@@ -139,14 +139,14 @@ class EventDetailsPage {
             this.hideRegistrationModal();
         });
 
-        // 点击模态框外部关闭
+        // Click outside the modal box to close it.
         document.getElementById('register-modal').addEventListener('click', (e) => {
             if (e.target.id === 'register-modal') {
                 this.hideRegistrationModal();
             }
         });
 
-        // 分享按钮点击事件
+        // Share button click event
         document.querySelector('.share-btn').addEventListener('click', () => {
             this.shareEvent();
         });
@@ -173,7 +173,7 @@ class EventDetailsPage {
             })
             .catch(error => console.log('Error sharing:', error));
         } else {
-            // 备用方案：复制链接到剪贴板
+            // Alternative solution: Copy the link to the clipboard
             navigator.clipboard.writeText(window.location.href)
                 .then(() => {
                     alert('Event link copied to clipboard!');
@@ -191,5 +191,5 @@ class EventDetailsPage {
     }
 }
 
-// 初始化详情页面
+// Initialization Details Page
 const eventDetailsPage = new EventDetailsPage();

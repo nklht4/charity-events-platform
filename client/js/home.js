@@ -1,4 +1,4 @@
-// 首页功能
+// Homepage functionality
 class HomePage {
     constructor() {
         this.eventsContainer = document.getElementById('events-container');
@@ -50,7 +50,7 @@ class HomePage {
 
         this.eventsContainer.innerHTML = events.map(event => this.createEventCard(event)).join('');
         
-        // 添加事件监听器
+        // Add event listeners
         this.attachEventListeners();
     }
 
@@ -106,7 +106,7 @@ class HomePage {
     }
 
     attachEventListeners() {
-        // 添加卡片点击事件
+        // Add card click events
         document.querySelectorAll('.event-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 if (!e.target.classList.contains('view-details-btn')) {
@@ -149,5 +149,5 @@ class HomePage {
     }
 }
 
-// 初始化首页
+// Initialize homepage
 const homePage = new HomePage();

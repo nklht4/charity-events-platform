@@ -1,4 +1,4 @@
-// 搜索页面功能
+// Search page functionality
 class SearchPage {
     constructor() {
         this.categories = [];
@@ -50,14 +50,14 @@ class SearchPage {
     }
 
     setupEventListeners() {
-        // 分类选择
+        // Category selection
         document.querySelectorAll('input[name="category"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 this.currentFilters.category = e.target.value;
             });
         });
 
-        // 日期选择
+        // Date selection
         document.querySelectorAll('input[name="date"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 this.currentFilters.date = e.target.value;
@@ -66,33 +66,33 @@ class SearchPage {
             });
         });
 
-        // 具体日期输入
+        // Specific date input
         document.getElementById('specific-date').addEventListener('change', (e) => {
             this.currentFilters.specificDate = e.target.value;
         });
 
-        // 地点输入
+        // Location input
         document.getElementById('location-input').addEventListener('input', (e) => {
             this.currentFilters.location = e.target.value;
         });
 
-        // 排序选择
+        // Sort selection
         document.getElementById('sort-select').addEventListener('change', (e) => {
             this.currentFilters.sort = e.target.value;
             this.performSearch();
         });
 
-        // 应用筛选按钮
+        // Apply filters button
         document.getElementById('apply-filters').addEventListener('click', () => {
             this.performSearch();
         });
 
-        // 清除筛选按钮
+        // Clear filters button
         document.getElementById('clear-filters').addEventListener('click', () => {
             this.clearFilters();
         });
 
-        // 重置搜索按钮
+        // Reset search button
         document.getElementById('reset-search').addEventListener('click', () => {
             this.clearFilters();
         });
@@ -110,7 +110,7 @@ class SearchPage {
             errorElement.style.display = 'none';
             noResultsElement.style.display = 'none';
 
-            // 构建查询参数
+            // Build query parameters
             const params = new URLSearchParams();
             
             if (this.currentFilters.category && this.currentFilters.category !== 'all') {
@@ -133,18 +133,18 @@ class SearchPage {
 
             let events = await response.json();
 
-            // 应用排序
+            // Apply sorting
             events = this.sortEvents(events, this.currentFilters.sort);
 
-            // 显示结果
+            // Display results
             this.displaySearchResults(events);
             
-            // 更新结果计数
+            // Update results count
             resultsCountElement.textContent = `${events.length} events found`;
             
             loadingElement.style.display = 'none';
 
-            // 显示无结果信息
+            // Show no results message
             if (events.length === 0) {
                 noResultsElement.style.display = 'block';
             }
@@ -245,7 +245,7 @@ class SearchPage {
     }
 
     clearFilters() {
-        // 重置表单
+        // Reset form
         document.querySelector('input[name="category"][value="all"]').checked = true;
         document.querySelector('input[name="date"][value="all"]').checked = true;
         document.getElementById('specific-date').style.display = 'none';
@@ -253,7 +253,7 @@ class SearchPage {
         document.getElementById('location-input').value = '';
         document.getElementById('sort-select').value = 'date';
 
-        // 重置过滤器状态
+        // Reset filter state
         this.currentFilters = {
             category: 'all',
             date: 'all',
@@ -262,10 +262,10 @@ class SearchPage {
             sort: 'date'
         };
 
-        // 重新搜索
+        // Perform new search
         this.performSearch();
     }
 }
 
-// 初始化搜索页面
+// Initialize search page
 const searchPage = new SearchPage();

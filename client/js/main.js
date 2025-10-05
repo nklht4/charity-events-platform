@@ -1,10 +1,10 @@
-// 通用工具函数
+// General utility functions
 class CharityApp {
     constructor() {
         this.API_BASE = 'http://localhost:3000/api';
     }
 
-    // 显示加载状态
+    // Show loading state
     showLoading(element) {
         element.innerHTML = `
             <div class="loading">
@@ -14,7 +14,7 @@ class CharityApp {
         `;
     }
 
-    // 显示错误信息
+    // Show error message
     showError(element, message) {
         element.innerHTML = `
             <div class="error-message">
@@ -24,7 +24,7 @@ class CharityApp {
         `;
     }
 
-    // 格式化日期
+    // Format date
     formatDate(dateString) {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-AU', {
@@ -34,7 +34,7 @@ class CharityApp {
         });
     }
 
-    // 格式化价格
+    // Format price
     formatPrice(price) {
         if (parseFloat(price) === 0) {
             return '<span class="event-free">FREE</span>';
@@ -42,22 +42,22 @@ class CharityApp {
         return `$${parseFloat(price).toFixed(2)}`;
     }
 
-    // 计算进度百分比
+    // Calculate progress percentage
     calculateProgress(current, goal) {
         return Math.min(Math.round((current / goal) * 100), 100);
     }
 
-    // 获取URL参数
+    // Get URL parameters
     getUrlParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
 
-    // 设置页面标题
+    // Set page title
     setPageTitle(title) {
         document.title = `${title} - HopeBridge`;
     }
 }
 
-// 初始化应用
+// Initialize application
 const app = new CharityApp();
