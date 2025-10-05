@@ -1,0 +1,195 @@
+// 详情页面功能
+class EventDetailsPage {
+    constructor() {
+        this.eventId = this.getEventIdFromUrl();
+        this.eventData = null;
+        this.init();
+    }
+
+    getEventIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
+    async init() {
+        if (!this.eventId) {
+            this.showError('No event ID provided.');
+            return;
+        }
+
+        await this.loadEventDetails();
+        this.setupEventListeners();
+    }
+
+    async loadEventDetails() {
+        const loadingElement = document.getElementById('event-loading');
+        const errorElement = document.getElementById('event-error');
+        const contentElement = document.getElementById('event-content');
+
+        try {
+            app.showLoading(loadingElement);
+            errorElement.style.display = 'none';
+
+            const response = await fetch(`${app.API_BASE}/events/${this.eventId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            this.eventData = await response.json();
+            
+            this.displayEventDetails();
+            loadingElement.style.display = 'none';
+            contentElement.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error loading event details:', error);
+            loadingElement.style.display = 'none';
+            errorElement.style.display = 'block';
+            this.showError('Unable to load event details. Please try again later.');
+        }
+    }
+
+    displayEventDetails() {
+        if (!this.eventData) return;
+
+        // 设置页面标题
+        app.setPageTitle(this.eventData.EventName);
+
+        // 更新事件头部信息
+        this.updateEventHeader();
+        
+        // 更新事件详情
+        this.updateEventDetails();
+        
+        // 更新进度信息
+        this.updateProgressInfo();
+        
+        // 更新快速信息
+        this.updateQuickInfo();
+        
+        // 更新模态框内容
+        this.updateModalContent();
+    }
+
+    updateEventHeader() {
+        document.getElementById('event-category').textContent = this.eventData.CategoryName;
+        document.getElementById('event-category-text').textContent = this.eventData.CategoryName;
+        document.getElementById('event-title').textContent = this.eventData.EventName;
+        document.getElementById('event-location').textContent = this.eventData.Location;
+        
+        const dateFormatted = app.formatDate(this.eventData.EventDate);
+        document.getElementById('event-date').textContent = dateFormatted;
+        
+        const priceDisplay = app.formatPrice(this.eventData.TicketPrice);
+        document.getElementById('event-price').innerHTML = priceDisplay;
+    }
+
+    updateEventDetails() {
+        document.getElementById('event-description').textContent = this.eventData.Description;
+        
+        const dateFormatted = app.formatDate(this.eventData.EventDate);
+        document.getElementById('detail-date').textContent = dateFormatted;
+        document.getElementById('detail-location').textContent = this.eventData.Location;
+        document.getElementById('detail-category').textContent = this.eventData.CategoryName;
+        document.getElementById('detail-organizer').textContent = this.eventData.OrganizerName || 'HopeBridge Team';
+    }
+
+    updateProgressInfo() {
+        const progress = app.calculateProgress(this.eventData.CurrentAttendees, this.eventData.GoalAttendees);
+        
+        document.getElementById('progress-current').textContent = this.eventData.CurrentAttendees.toLocaleString();
+        document.getElementById('progress-goal').textContent = this.eventData.GoalAttendees.toLocaleString();
+        document.getElementById('progress-percentage').textContent = `${progress}%`;
+        
+        const progressFill = document.getElementById('progress-fill');
+        progressFill.style.width = `${progress}%`;
+    }
+
+    updateQuickInfo() {
+        const priceDisplay = app.formatPrice(this.eventData.TicketPrice);
+        document.getElementById('quick-price').innerHTML = priceDisplay;
+        
+        const availableSpots = this.eventData.GoalAttendees - this.eventData.CurrentAttendees;
+        document.getElementById('quick-spots').textContent = `${availableSpots.toLocaleString()} spots left`;
+    }
+
+    updateModalContent() {
+        document.getElementById('modal-event-title').textContent = this.eventData.EventName;
+        
+        const dateFormatted = app.formatDate(this.eventData.EventDate);
+        document.getElementById('modal-event-date').textContent = dateFormatted;
+        
+        const priceDisplay = app.formatPrice(this.eventData.TicketPrice);
+        document.getElementById('modal-event-price').innerHTML = priceDisplay;
+    }
+
+    setupEventListeners() {
+        // 注册按钮点击事件
+        document.getElementById('register-btn').addEventListener('click', () => {
+            this.showRegistrationModal();
+        });
+
+        // 模态框关闭事件
+        document.getElementById('modal-close').addEventListener('click', () => {
+            this.hideRegistrationModal();
+        });
+
+        document.getElementById('modal-cancel').addEventListener('click', () => {
+            this.hideRegistrationModal();
+        });
+
+        // 点击模态框外部关闭
+        document.getElementById('register-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'register-modal') {
+                this.hideRegistrationModal();
+            }
+        });
+
+        // 分享按钮点击事件
+        document.querySelector('.share-btn').addEventListener('click', () => {
+            this.shareEvent();
+        });
+    }
+
+    showRegistrationModal() {
+        const modal = document.getElementById('register-modal');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    hideRegistrationModal() {
+        const modal = document.getElementById('register-modal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    shareEvent() {
+        if (navigator.share) {
+            navigator.share({
+                title: this.eventData.EventName,
+                text: this.eventData.Description,
+                url: window.location.href,
+            })
+            .catch(error => console.log('Error sharing:', error));
+        } else {
+            // 备用方案：复制链接到剪贴板
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => {
+                    alert('Event link copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+    }
+
+    showError(message) {
+        const errorElement = document.getElementById('event-error');
+        errorElement.style.display = 'block';
+        errorElement.querySelector('p').textContent = message;
+    }
+}
+
+// 初始化详情页面
+const eventDetailsPage = new EventDetailsPage();
