@@ -34,6 +34,63 @@ db.connect((err) => {
     console.log('📊 Database: charityevents_db');
 });
 
+// 在 server.js 中修改 processEventImages 函数
+function processEventImages(events) {
+    // 创建活动ID到图片的映射
+    const eventImageMapping = {
+        7: 'images/1.jpg',   // Charity Tennis Open
+        6: 'images/2.jpeg',  // Tech Skills Workshop
+        2: 'images/3.webp',  // Sunrise Fun Run 2025
+        1: 'images/4.webp',  // Hope Charity Gala 2025
+        5: 'images/5.webp',  // Online Silent Auction
+        8: 'images/6.webp',  // Taste of Hope Festival
+        3: 'images/7.webp',  // Art for Hope Exhibition
+        4: 'images/8.webp'   // Symphony of Hope Concert
+    };
+
+    return events.map(event => {
+        // 强制使用我们映射的图片，忽略数据库中的图片路径
+        const mappedImage = eventImageMapping[event.EventID];
+        if (mappedImage) {
+            return {
+                ...event,
+                EventImage: mappedImage
+            };
+        }
+        
+        // 如果没有映射，使用默认逻辑
+        if (event.EventImage) {
+            // 如果数据库中有图片路径，确保是正确的相对路径
+            if (!event.EventImage.startsWith('images/')) {
+                event.EventImage = 'images/' + event.EventImage;
+            }
+            return event;
+        } else {
+            // 如果没有图片，根据分类使用默认图片
+            const defaultImage = getDefaultImageByCategory(event.CategoryName);
+            return {
+                ...event,
+                EventImage: defaultImage
+            };
+        }
+    });
+}
+// 根据分类获取默认图片
+function getDefaultImageByCategory(categoryName) {
+    const defaultImages = {
+        'Sports Tournament': 'images/1.jpg',
+        'Workshop': 'images/2.jpeg',
+        'Fun Run': 'images/3.webp',
+        'Gala Dinner': 'images/4.webp',
+        'Silent Auction': 'images/5.webp',
+        'Food Festival': 'images/6.webp',
+        'Art Exhibition': 'images/7.webp',
+        'Concert': 'images/8.webp'
+    };
+    
+    return defaultImages[categoryName] || 'images/1.jpg';
+}
+
 app.get('/api/events', (req, res) => {
     const query = `
         SELECT e.*, c.CategoryName 
@@ -48,8 +105,12 @@ app.get('/api/events', (req, res) => {
             console.error('Database query error:', err);
             return res.status(500).json({ error: 'Server Error' });
         }
-        console.log(`📋 Return ${results.length} activities`);
-        res.json(results);
+        
+        // 处理图片路径
+        const eventsWithImages = processEventImages(results);
+        
+        console.log(`📋 Return ${eventsWithImages.length} activities`);
+        res.json(eventsWithImages);
     });
 });
 
@@ -86,8 +147,12 @@ app.get('/api/events/search', (req, res) => {
             console.error('Search query error:', err);
             return res.status(500).json({ error: 'Server Error' });
         }
-        console.log(`🔍 Search results: ${results.length} items found`);
-        res.json(results);
+        
+        // 处理图片路径
+        const eventsWithImages = processEventImages(results);
+        
+        console.log(`🔍 Search results: ${eventsWithImages.length} items found`);
+        res.json(eventsWithImages);
     });
 });
 
@@ -110,8 +175,12 @@ app.get('/api/events/:id', (req, res) => {
         if (results.length === 0) {
             return res.status(404).json({ error: 'Activity not found' });
         }
-        console.log(`✅ Find the activity: ${results[0].EventName}`);
-        res.json(results[0]);
+        
+        // 处理图片路径
+        const eventWithImage = processEventImages([results[0]])[0];
+        
+        console.log(`✅ Find the activity: ${eventWithImage.EventName}`);
+        res.json(eventWithImage);
     });
 });
 

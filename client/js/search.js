@@ -186,15 +186,16 @@ class SearchPage {
         const progress = app.calculateProgress(event.CurrentAttendees, event.GoalAttendees);
         const priceDisplay = app.formatPrice(event.TicketPrice);
         const dateFormatted = app.formatDate(event.EventDate);
+        
+        // 处理图片路径
+        const eventImage = event.EventImage || this.getDefaultImageByCategory(event.CategoryName);
 
         return `
             <div class="event-card" data-event-id="${event.EventID}">
                 <div class="event-image">
                     <div class="event-category">${event.CategoryName}</div>
-                    ${event.EventImage ? 
-                        `<img src="${event.EventImage}" alt="${event.EventName}" onerror="this.style.display='none'">` : 
-                        '📅'
-                    }
+                    <img src="${eventImage}" alt="${event.EventName}" 
+                         onerror="this.src='images/1.jpg'">
                 </div>
                 <div class="event-content">
                     <div class="event-header">
@@ -227,6 +228,22 @@ class SearchPage {
                 </div>
             </div>
         `;
+    }
+
+    // 根据分类获取默认图片
+    getDefaultImageByCategory(categoryName) {
+    const defaultImages = {
+            'Sports Tournament': 'images/1.jpg',
+            'Workshop': 'images/2.jpeg',
+            'Fun Run': 'images/3.webp',
+            'Gala Dinner': 'images/4.webp',
+            'Silent Auction': 'images/5.webp',
+            'Food Festival': 'images/6.webp',
+            'Art Exhibition': 'images/7.webp',
+            'Concert': 'images/8.webp'
+        };
+    
+        return defaultImages[categoryName] || 'images/1.jpg';
     }
 
     viewEventDetails(eventId) {

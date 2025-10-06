@@ -56,6 +56,9 @@ class EventDetailsPage {
         // Set the page title
         app.setPageTitle(this.eventData.EventName);
 
+        // 更新事件图片 - 新增功能
+        this.updateEventImage();
+        
         // Update the header information of the event
         this.updateEventHeader();
         
@@ -70,6 +73,50 @@ class EventDetailsPage {
         
         // Update the content of the modal box
         this.updateModalContent();
+    }
+
+    // 新增：更新事件图片
+    updateEventImage() {
+        const eventImageElement = document.getElementById('event-image');
+        
+        if (!eventImageElement) {
+            console.warn('Event image element not found');
+            return;
+        }
+
+        if (this.eventData.EventImage) {
+            // 设置主图片 - 根据您的HTML结构调整
+            eventImageElement.innerHTML = `
+                <img src="${this.eventData.EventImage}" alt="${this.eventData.EventName}" 
+                     class="event-main-img"
+                     onerror="this.src='images/1.jpg'"
+                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            `;
+        } else {
+            // 使用默认图片
+            const defaultImage = this.getDefaultImageByCategory(this.eventData.CategoryName);
+            eventImageElement.innerHTML = `
+                <img src="${defaultImage}" alt="${this.eventData.EventName}" 
+                     class="event-main-img"
+                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            `;
+        }
+    }
+
+    // 根据分类获取默认图片
+    getDefaultImageByCategory(categoryName) {
+    const defaultImages = {
+            'Sports Tournament': 'images/1.jpg',
+            'Workshop': 'images/2.jpeg',
+            'Fun Run': 'images/3.webp',
+            'Gala Dinner': 'images/4.webp',
+            'Silent Auction': 'images/5.webp',
+            'Food Festival': 'images/6.webp',
+            'Art Exhibition': 'images/7.webp',
+            'Concert': 'images/8.webp'
+        };
+    
+        return defaultImages[categoryName] || 'images/1.jpg';
     }
 
     updateEventHeader() {
@@ -103,7 +150,9 @@ class EventDetailsPage {
         document.getElementById('progress-percentage').textContent = `${progress}%`;
         
         const progressFill = document.getElementById('progress-fill');
-        progressFill.style.width = `${progress}%`;
+        if (progressFill) {
+            progressFill.style.width = `${progress}%`;
+        }
     }
 
     updateQuickInfo() {
@@ -126,42 +175,61 @@ class EventDetailsPage {
 
     setupEventListeners() {
         // Registration button click event
-        document.getElementById('register-btn').addEventListener('click', () => {
-            this.showRegistrationModal();
-        });
+        const registerBtn = document.getElementById('register-btn');
+        if (registerBtn) {
+            registerBtn.addEventListener('click', () => {
+                this.showRegistrationModal();
+            });
+        }
 
         // Modal box close event
-        document.getElementById('modal-close').addEventListener('click', () => {
-            this.hideRegistrationModal();
-        });
+        const modalClose = document.getElementById('modal-close');
+        if (modalClose) {
+            modalClose.addEventListener('click', () => {
+                this.hideRegistrationModal();
+            });
+        }
 
-        document.getElementById('modal-cancel').addEventListener('click', () => {
-            this.hideRegistrationModal();
-        });
+        const modalCancel = document.getElementById('modal-cancel');
+        if (modalCancel) {
+            modalCancel.addEventListener('click', () => {
+                this.hideRegistrationModal();
+            });
+        }
 
         // Click outside the modal box to close it.
-        document.getElementById('register-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'register-modal') {
-                this.hideRegistrationModal();
-            }
-        });
+        const registerModal = document.getElementById('register-modal');
+        if (registerModal) {
+            registerModal.addEventListener('click', (e) => {
+                if (e.target.id === 'register-modal') {
+                    this.hideRegistrationModal();
+                }
+            });
+        }
 
         // Share button click event
-        document.querySelector('.share-btn').addEventListener('click', () => {
-            this.shareEvent();
-        });
+        const shareBtn = document.querySelector('.share-btn');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', () => {
+                this.shareEvent();
+            });
+        }
     }
 
     showRegistrationModal() {
         const modal = document.getElementById('register-modal');
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     hideRegistrationModal() {
         const modal = document.getElementById('register-modal');
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
 
     shareEvent() {
@@ -186,8 +254,13 @@ class EventDetailsPage {
 
     showError(message) {
         const errorElement = document.getElementById('event-error');
-        errorElement.style.display = 'block';
-        errorElement.querySelector('p').textContent = message;
+        if (errorElement) {
+            errorElement.style.display = 'block';
+            const errorParagraph = errorElement.querySelector('p');
+            if (errorParagraph) {
+                errorParagraph.textContent = message;
+            }
+        }
     }
 }
 
