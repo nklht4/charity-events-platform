@@ -34,9 +34,8 @@ db.connect((err) => {
     console.log('📊 Database: charityevents_db');
 });
 
-// 在 server.js 中修改 processEventImages 函数
 function processEventImages(events) {
-    // 创建活动ID到图片的映射
+   // Create a mapping from activity IDs to images
     const eventImageMapping = {
         7: 'images/1.jpg',   // Charity Tennis Open
         6: 'images/2.jpeg',  // Tech Skills Workshop
@@ -49,7 +48,7 @@ function processEventImages(events) {
     };
 
     return events.map(event => {
-        // 强制使用我们映射的图片，忽略数据库中的图片路径
+   
         const mappedImage = eventImageMapping[event.EventID];
         if (mappedImage) {
             return {
@@ -58,15 +57,15 @@ function processEventImages(events) {
             };
         }
         
-        // 如果没有映射，使用默认逻辑
+   
         if (event.EventImage) {
-            // 如果数据库中有图片路径，确保是正确的相对路径
+ 
             if (!event.EventImage.startsWith('images/')) {
                 event.EventImage = 'images/' + event.EventImage;
             }
             return event;
         } else {
-            // 如果没有图片，根据分类使用默认图片
+
             const defaultImage = getDefaultImageByCategory(event.CategoryName);
             return {
                 ...event,
@@ -75,7 +74,7 @@ function processEventImages(events) {
         }
     });
 }
-// 根据分类获取默认图片
+
 function getDefaultImageByCategory(categoryName) {
     const defaultImages = {
         'Sports Tournament': 'images/1.jpg',
@@ -106,7 +105,7 @@ app.get('/api/events', (req, res) => {
             return res.status(500).json({ error: 'Server Error' });
         }
         
-        // 处理图片路径
+
         const eventsWithImages = processEventImages(results);
         
         console.log(`📋 Return ${eventsWithImages.length} activities`);
@@ -148,7 +147,7 @@ app.get('/api/events/search', (req, res) => {
             return res.status(500).json({ error: 'Server Error' });
         }
         
-        // 处理图片路径
+
         const eventsWithImages = processEventImages(results);
         
         console.log(`🔍 Search results: ${eventsWithImages.length} items found`);
@@ -176,7 +175,7 @@ app.get('/api/events/:id', (req, res) => {
             return res.status(404).json({ error: 'Activity not found' });
         }
         
-        // 处理图片路径
+
         const eventWithImage = processEventImages([results[0]])[0];
         
         console.log(`✅ Find the activity: ${eventWithImage.EventName}`);

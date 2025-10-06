@@ -59,7 +59,7 @@ class HomePage {
         const priceDisplay = app.formatPrice(event.TicketPrice);
         const dateFormatted = app.formatDate(event.EventDate);
         
-        // 处理图片路径
+
         const eventImage = event.EventImage || this.getDefaultImageByCategory(event.CategoryName);
 
         return `
@@ -102,7 +102,7 @@ class HomePage {
         `;
     }
 
-    // 根据分类获取默认图片
+
     getDefaultImageByCategory(categoryName) {
     const defaultImages = {
             'Sports Tournament': 'images/1.jpg',

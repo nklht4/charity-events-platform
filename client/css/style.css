@@ -1440,19 +1440,18 @@ body {
     }
 }
 
-/* 统一图片样式 */
+
 .event-image img,
 .event-main-img,
 .event-card .event-image img,
 .event-image-large img {
     width: 100%;
-    height: 200px; /* 统一高度 */
-    object-fit: cover; /* 保持比例并填充容器 */
-    object-position: center; /* 图片居中显示 */
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
     display: block;
 }
 
-/* 主页和搜索页的活动卡片图片 */
 .event-card .event-image {
     height: 200px;
     position: relative;
@@ -1468,7 +1467,7 @@ body {
     transform: scale(1.05);
 }
 
-/* 详情页大图样式 */
+
 .event-image-large {
     height: 400px;
     position: relative;
@@ -1483,7 +1482,6 @@ body {
     border-radius: 12px;
 }
 
-/* 分类徽章样式 */
 .event-category {
     position: absolute;
     top: 1rem;
@@ -1497,7 +1495,6 @@ body {
     z-index: 2;
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
     .event-card .event-image img {
         height: 180px;

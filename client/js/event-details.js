@@ -56,7 +56,7 @@ class EventDetailsPage {
         // Set the page title
         app.setPageTitle(this.eventData.EventName);
 
-        // 更新事件图片 - 新增功能
+
         this.updateEventImage();
         
         // Update the header information of the event
@@ -75,7 +75,7 @@ class EventDetailsPage {
         this.updateModalContent();
     }
 
-    // 新增：更新事件图片
+
     updateEventImage() {
         const eventImageElement = document.getElementById('event-image');
         
@@ -85,7 +85,7 @@ class EventDetailsPage {
         }
 
         if (this.eventData.EventImage) {
-            // 设置主图片 - 根据您的HTML结构调整
+
             eventImageElement.innerHTML = `
                 <img src="${this.eventData.EventImage}" alt="${this.eventData.EventName}" 
                      class="event-main-img"
@@ -93,7 +93,7 @@ class EventDetailsPage {
                      style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
             `;
         } else {
-            // 使用默认图片
+
             const defaultImage = this.getDefaultImageByCategory(this.eventData.CategoryName);
             eventImageElement.innerHTML = `
                 <img src="${defaultImage}" alt="${this.eventData.EventName}" 
@@ -103,7 +103,6 @@ class EventDetailsPage {
         }
     }
 
-    // 根据分类获取默认图片
     getDefaultImageByCategory(categoryName) {
     const defaultImages = {
             'Sports Tournament': 'images/1.jpg',
